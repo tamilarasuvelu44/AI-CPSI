@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Twin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="sidebar">
+    <h2>AI-CPSI</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="attack.html">Attack Simulator</a>
+    <a href="threat_detection.html">Threat Detection</a>
+    <a href="DigitalTwin.html" class="active">Digital Twin</a>
+    <a href="Reports.html">Reports</a>
+    <a href="Settings.html">Settings</a>
+</div>
+<div class="main">
+    <div class="page-title">
+        <div>
+            <h1>Digital Twin</h1>
+            <p class="site-note">Live view of simulated devices and sensor states.</p>
+        </div>
+    </div>
+    <div class="panel">
+        <h2>Device Mirror</h2>
+        <ul class="twin-list" id="twinDevices"></ul>
+    </div>
+    <div class="panel">
+        <h2>Sensor Mirror</h2>
+        <ul class="twin-list" id="twinSensors"></ul>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
