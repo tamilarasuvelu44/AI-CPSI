@@ -1,0 +1,219 @@
+CREATE TABLE users (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    username VARCHAR(100) NOT NULL,
+
+    email VARCHAR(150) UNIQUE NOT NULL,
+
+    password VARCHAR(255) NOT NULL,
+
+    role VARCHAR(50),
+
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+
+);
+CREATE TABLE projects (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_name VARCHAR(200),
+
+    description TEXT,
+
+    owner_id INTEGER,
+
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(owner_id) REFERENCES users(id)
+
+);
+CREATE TABLE devices (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_id INTEGER,
+
+    device_name VARCHAR(150),
+
+    device_type VARCHAR(100),
+
+    ip_address VARCHAR(50),
+
+    mac_address VARCHAR(50),
+
+    status VARCHAR(30),
+
+    location VARCHAR(100),
+
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+
+);
+CREATE TABLE sensors (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    device_id INTEGER,
+
+    sensor_name VARCHAR(150),
+
+    sensor_type VARCHAR(100),
+
+    sensor_value FLOAT,
+
+    unit VARCHAR(20),
+
+    location VARCHAR(100),
+
+    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(device_id) REFERENCES devices(id)
+
+);
+CREATE TABLE attack_logs (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_id INTEGER,
+
+    attack_type VARCHAR(100),
+
+    target_device VARCHAR(100),
+
+    attack_status VARCHAR(50),
+
+    success BOOLEAN,
+
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+
+);
+CREATE TABLE attack_logs (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_id INTEGER,
+
+    attack_type VARCHAR(100),
+
+    target_device VARCHAR(100),
+
+    attack_status VARCHAR(50),
+
+    success BOOLEAN,
+
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+
+);
+CREATE TABLE risk_scores (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_id INTEGER,
+
+    score FLOAT,
+
+    risk_level VARCHAR(30),
+
+    generated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+
+);
+CREATE TABLE network_logs (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    source_ip VARCHAR(50),
+
+    destination_ip VARCHAR(50),
+
+    protocol VARCHAR(20),
+
+    port INTEGER,
+
+    packet_size INTEGER,
+
+    action VARCHAR(30),
+
+    log_time DATETIME DEFAULT CURRENT_TIMESTAMP
+
+);
+CREATE TABLE vulnerabilities (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_id INTEGER,
+
+    device_id INTEGER,
+
+    vulnerability_name VARCHAR(200),
+
+    severity VARCHAR(50),
+
+    description TEXT,
+
+    recommendation TEXT,
+
+    FOREIGN KEY(project_id) REFERENCES projects(id),
+
+    FOREIGN KEY(device_id) REFERENCES devices(id)
+
+);
+CREATE TABLE ai_predictions (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    attack_log_id INTEGER,
+
+    predicted_attack VARCHAR(100),
+
+    confidence FLOAT,
+
+    prediction_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(attack_log_id) REFERENCES attack_logs(id)
+
+);
+CREATE TABLE reports (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_id INTEGER,
+
+    report_name VARCHAR(200),
+
+    report_path TEXT,
+
+    generated_on DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+
+);
+CREATE TABLE alerts (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    project_id INTEGER,
+
+    alert_type VARCHAR(100),
+
+    severity VARCHAR(50),
+
+    message TEXT,
+
+    alert_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+
+);
+INSERT INTO users
+
+(username,email,password,role)
+
+VALUES
+
+('admin','admin@gmail.com','admin123','Administrator');
