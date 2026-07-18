@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attack Simulator</title>
+    <link rel="stylesheet" href="attack.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Cyber Attack Simulator</h1>
+
+<div class="card">
+
+<label>Attack Type</label>
+
+<select id="attackType">
+
+<option>Phishing</option>
+
+<option>DDoS</option>
+
+<option>Ransomware</option>
+
+<option>SQL Injection</option>
+
+<option>MITM Attack</option>
+
+</select>
+
+<label>Target Device</label>
+
+<select id="targetDevice">
+
+<option>PLC Controller</option>
+
+<option>IoT Camera</option>
+
+<option>Temperature Sensor</option>
+
+<option>Smart Meter</option>
+
+<option>Firewall</option>
+
+</select>
+
+<button id="startBtn">
+
+Launch Simulation
+
+</button>
+
+</div>
+
+<div class="result">
+
+<h2>Simulation Result</h2>
+
+<p><b>Status :</b> <span id="status">Waiting...</span></p>
+
+<p><b>Risk Score :</b> <span id="risk">0</span></p>
+
+<p><b>Recommendation :</b></p>
+
+<ul id="recommendation"></ul>
+
+</div>
+
+</div>
+
+<script src="attack.js"></script>
+
+</body>
+
+</html>
